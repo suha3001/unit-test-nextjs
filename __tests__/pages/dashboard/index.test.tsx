@@ -1,7 +1,12 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";  // สำหรับ matchers เช่น `toHaveTextContent`
-import DashboardIndexPage from "@/pages/dashboard";
+import DashboardIndexPage, { fetchPosts } from "@/pages/dashboard";
+
+// jest.mock('@/pages/dashboard', () => ({
+//     ...jest.requireActual('@/pages/dashboard'),
+//     fetchPosts: jest.fn(),
+// }));
 
 describe('Dashboard page', () => {
     it('Should render properly', () => {
@@ -16,9 +21,13 @@ describe('Dashboard page', () => {
     it('ปุ่มกดยืนยัน', () => {
         render(<DashboardIndexPage/>);
 
-        const buttonElement = screen.getByRole('button');
+        const buttonElement = screen.getByTestId('button-confirm');
 
         expect(buttonElement).toBeDisabled();
+
+        // fireEvent.click(buttonElement);
+
+        // expect(fetchPosts).toHaveBeenCalled();
     });
 
     it('ข้อความสีฟ้า', () => {
@@ -28,4 +37,13 @@ describe('Dashboard page', () => {
 
         expect(pElement).toHaveClass('text-blue');
     });
+
+    it('คำอธิบาย', () => {
+        render(<DashboardIndexPage/>);
+
+        const pElement = screen.getByTestId('paragraph-description');
+
+        expect(pElement).toHaveClass('decription-hl')
+    });
+
 });
