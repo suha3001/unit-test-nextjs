@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";  // สำหรับ matchers เช่น `toHaveTextContent`
-import DashboardIndexPage, { fetchPosts } from "@/pages/dashboard";
+import  { fetchPosts, subtract, DashboardIndexPage } from "@/pages/dashboard";
 
 // jest.mock('@/pages/dashboard', () => ({
 //     ...jest.requireActual('@/pages/dashboard'),
@@ -46,4 +46,13 @@ describe('Dashboard page', () => {
         expect(pElement).toHaveClass('decription-hl')
     });
 
+    it('Must substract properly', async () => {
+        expect(subtract(1, 2)).toBe(-1)
+    })
+      
+    it('value', () => {
+        render(<DashboardIndexPage/>);
+        const textInput = screen.getByTestId("input-text");
+        expect(textInput).toHaveValue();
+    })
 });

@@ -17,14 +17,19 @@ export async function fetchPosts() {
     }
 }
 
+function subtract(a:number, b:number):number {
+  return a - b;
+}
 
-function DashboardIndexPage() {
+function DashboardIndexPage(): JSX.Element {
   const [bt, setbt] = useState('กดปุ่ม')
   const handleClick = () => {
     console.log('submit')
     setbt('สำเร็จ');
     fetchPosts();
+    
   };
+
 
   return (
     <div className='flex justify-center flex-col gap-4 h-full w-full p-10'>
@@ -35,8 +40,9 @@ function DashboardIndexPage() {
        <p data-testid='paragraph-blue' className='text-blue text-xl font-bold'>Hello world</p>
 
        <p data-testid='paragraph-description' className='decription-hl text-xs font-medium'>คำอธิบาย</p>
+       <input type="text" value="text1" data-testid="input-text" />
     </div>
   )
 }
 
-export default DashboardIndexPage
+export { DashboardIndexPage, subtract };
